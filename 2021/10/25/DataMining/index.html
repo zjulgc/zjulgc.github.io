@@ -1,0 +1,906 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DataMining | Blog for LGC</title><meta name="description" content="Chapter 1 Intro.  数据挖掘概述    背景：现在拥有大量的数据，但是我缺拥有很少的从数据中得到的知识   什么是数据挖掘：从数据中发现知识，从个人的理解就是通过一些手段表述数据的高层抽象语义   数据挖掘的几个重要问题：   从什么数据进行挖掘？   数据库中的数据，数据库中的数据会比较规范干净 其他各种数据，例如传感器中的数据，时间序列数据     要挖掘哪种模式？   概化模"><meta name="keywords" content="course"><meta name="author" content="LGC"><meta name="copyright" content="LGC"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://zjulgc.github.io/2021/10/25/DataMining/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="DataMining"><meta property="og:url" content="https://zjulgc.github.io/2021/10/25/DataMining/"><meta property="og:site_name" content="Blog for LGC"><meta property="og:description" content="Chapter 1 Intro.  数据挖掘概述    背景：现在拥有大量的数据，但是我缺拥有很少的从数据中得到的知识   什么是数据挖掘：从数据中发现知识，从个人的理解就是通过一些手段表述数据的高层抽象语义   数据挖掘的几个重要问题：   从什么数据进行挖掘？   数据库中的数据，数据库中的数据会比较规范干净 其他各种数据，例如传感器中的数据，时间序列数据     要挖掘哪种模式？   概化模"><meta property="og:image" content="https://zjulgc.github.io/img/h6.jpg"><meta property="article:published_time" content="2021-10-25T03:27:11.000Z"><meta property="article:modified_time" content="2021-11-05T05:28:46.591Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.0.2',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-11-05 13:28:46'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 5.0.2"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/img/hpic.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">24</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">25</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Chapter 1 Intro.</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Chapter 2 了解数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">数据集合的类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.2.</span> <span class="toc-text">数据对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%9F%E8%AE%A1%E9%87%8F%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.3.</span> <span class="toc-text">数据的统计量描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%AD%E5%BF%83%E8%B6%8B%E5%8A%BF"><span class="toc-number">2.3.1.</span> <span class="toc-text">数据的中心趋势</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9D%87%E5%80%BC-Mean"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">均值(Mean)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E4%BD%8D%E6%95%B0-Median"><span class="toc-number">2.3.1.2.</span> <span class="toc-text">中位数(Median)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%97%E6%95%B0-Mode"><span class="toc-number">2.3.1.3.</span> <span class="toc-text">众数(Mode)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0vs%E5%81%8F%E7%A7%BB%E6%95%B0%E6%8D%AE"><span class="toc-number">2.3.1.4.</span> <span class="toc-text">对称vs偏移数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A6%BB%E6%95%A3%E5%BA%A6"><span class="toc-number">2.3.2.</span> <span class="toc-text">数据的离散度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E6%8F%8F%E8%BF%B0%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="toc-number">2.3.3.</span> <span class="toc-text">图描述统计量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">2.4.</span> <span class="toc-text">数据可视化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%92%8C%E7%9B%B8%E5%BC%82%E6%80%A7"><span class="toc-number">2.5.</span> <span class="toc-text">数据的相似性和相异性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9F%A9%E9%98%B5"><span class="toc-number">2.5.1.</span> <span class="toc-text">数据矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%BC%82%E6%80%A7%E7%9F%A9%E9%98%B5"><span class="toc-number">2.5.2.</span> <span class="toc-text">相异性矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%91%E4%BC%BC%E5%BA%A6%E9%87%8F"><span class="toc-number">2.5.3.</span> <span class="toc-text">近似度量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">Chapter 3 数据预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97"><span class="toc-number">3.1.</span> <span class="toc-text">数据清洗</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E7%BC%BA%E5%80%BC"><span class="toc-number">3.1.1.</span> <span class="toc-text">空缺值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%99%AA%E5%A3%B0%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.2.</span> <span class="toc-text">噪声数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90"><span class="toc-number">3.2.</span> <span class="toc-text">数据集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90%E6%97%B6%E7%9A%84%E6%95%B0%E6%8D%AE%E5%86%97%E4%BD%99"><span class="toc-number">3.2.1.</span> <span class="toc-text">处理检测数据集成时的数据冗余</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90-Nominal-Data"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">相关性分析(Nominal Data)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E5%88%86%E6%9E%90-%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">相关系数分析(数值数据)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8F%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="toc-number">3.2.1.3.</span> <span class="toc-text">协相关系数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%A7%84%E7%BA%A6"><span class="toc-number">3.3.</span> <span class="toc-text">数据规约</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%8D%E7%BB%B4"><span class="toc-number">3.3.1.</span> <span class="toc-text">降维</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LDA"><span class="toc-number">3.3.1.1.</span> <span class="toc-text">LDA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PCA"><span class="toc-number">3.3.1.2.</span> <span class="toc-text">PCA</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E8%A7%84%E7%BA%A6"><span class="toc-number">3.3.2.</span> <span class="toc-text">数值规约</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9"><span class="toc-number">3.4.</span> <span class="toc-text">数据压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96"><span class="toc-number">3.5.</span> <span class="toc-text">归一化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">Chapter 4 频繁模式挖掘</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">一些定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%91%E7%B9%81%E6%A8%A1%E5%BC%8F%E6%A6%82%E5%BF%B5"><span class="toc-number">4.1.1.</span> <span class="toc-text">频繁模式概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E8%81%94%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.2.</span> <span class="toc-text">关联模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E9%A2%91%E7%B9%81%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%9E%81%E5%A4%A7%E9%A2%91%E7%B9%81%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.3.</span> <span class="toc-text">闭频繁模式和极大频繁模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%8C%96%E6%8E%98%E9%A2%91%E7%B9%81%E6%A8%A1%E5%BC%8F%EF%BC%9F"><span class="toc-number">4.2.</span> <span class="toc-text">如何挖掘频繁模式？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Apriori%E7%AE%97%E6%B3%95"><span class="toc-number">4.2.1.</span> <span class="toc-text">Apriori算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FPGrowth-%E4%B8%8D%E4%BD%BF%E7%94%A8%E5%80%99%E9%80%89%E9%9B%86%E6%8C%96%E6%8E%98%E9%A2%91%E7%B9%81%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.2.2.</span> <span class="toc-text">FPGrowth 不使用候选集挖掘频繁模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%8C%96%E6%8E%98"><span class="toc-number">4.3.</span> <span class="toc-text">序列模式的挖掘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.3.1.</span> <span class="toc-text">序列模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E6%95%B0%E6%8D%AE%E5%BA%93vs%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">事务数据库vs序列数据库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%8C%96%E6%8E%98-2"><span class="toc-number">4.3.2.</span> <span class="toc-text">序列模式的挖掘</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EApriori%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">4.3.2.1.</span> <span class="toc-text">基于Apriori的方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95"><span class="toc-number">4.4.</span> <span class="toc-text">模式评估方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%80%A7"><span class="toc-number">4.4.1.</span> <span class="toc-text">相关性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">Chapter 5 分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91"><span class="toc-number">5.1.</span> <span class="toc-text">决策树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E7%86%B5"><span class="toc-number">5.1.1.</span> <span class="toc-text">信息熵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0"><span class="toc-number">5.1.2.</span> <span class="toc-text">基尼指数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">5.1.3.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB"><span class="toc-number">5.2.</span> <span class="toc-text">贝叶斯分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA"><span class="toc-number">5.3.</span> <span class="toc-text">支持向量机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%84%E4%BB%B7%E4%BB%A5%E5%8F%8A%E9%80%89%E6%8B%A9"><span class="toc-number">5.4.</span> <span class="toc-text">模型的评价以及选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Confusion-matrix"><span class="toc-number">5.4.1.</span> <span class="toc-text">Confusion matrix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boostrap-%E8%87%AA%E5%8A%A9%E6%B3%95"><span class="toc-number">5.4.2.</span> <span class="toc-text">Boostrap(自助法)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E6%96%B9%E6%B3%95%E6%8F%90%E9%AB%98%E5%88%86%E7%B1%BB%E5%87%86%E7%A1%AE%E6%80%A7"><span class="toc-number">5.5.</span> <span class="toc-text">集成方法提高分类准确性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">Chapter 6 聚类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%9A%E7%B1%BB%E7%9A%84%E8%B4%A8%E9%87%8F"><span class="toc-number">6.1.</span> <span class="toc-text">聚类的质量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#k-means"><span class="toc-number">6.2.</span> <span class="toc-text">k-means</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E7%9A%84%E4%B8%A4%E9%98%B6%E6%AE%B5"><span class="toc-number">6.2.1.</span> <span class="toc-text">迭代的两阶段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#K-Medoids"><span class="toc-number">6.3.</span> <span class="toc-text">K-Medoids</span></a></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(/img/h6.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">Blog for LGC</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">DataMining</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-10-25T03:27:11.000Z" title="发表于 2021-10-25 11:27:11">2021-10-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-05T05:28:46.591Z" title="更新于 2021-11-05 13:28:46">2021-11-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/DataMining/">DataMining</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1>Chapter 1 Intro.</h1>
+<blockquote>
+<p>数据挖掘概述</p>
+</blockquote>
+<ul>
+<li>
+<p>背景：现在拥有大量的数据，但是我缺拥有很少的从数据中得到的知识</p>
+</li>
+<li>
+<p>什么是数据挖掘：从数据中发现知识，从个人的理解就是通过一些手段表述数据的高层抽象语义</p>
+</li>
+<li>
+<p>数据挖掘的几个重要问题：</p>
+<ul>
+<li>
+<p>从什么数据进行挖掘？</p>
+<blockquote>
+<ul>
+<li>数据库中的数据，数据库中的数据会比较规范干净</li>
+<li>其他各种数据，例如传感器中的数据，时间序列数据</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>要挖掘哪种模式？</p>
+<blockquote>
+<ul>
+<li>概化模式：人的理解能力有限，需要将数据进行概括让人更容易理解</li>
+<li>关联模式：挖解数据之间的联系</li>
+<li>分类</li>
+<li>聚类</li>
+<li>离群点分析</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>在数据挖掘中使用哪些技术？</p>
+<blockquote>
+<p><img src="/images/datamining/image-20211028103018342.png" alt="image-20211028103018342"></p>
+</blockquote>
+</li>
+<li>
+<p>能够在哪些应用中使用数据挖掘？</p>
+</li>
+</ul>
+</li>
+<li>
+<p>数据具有<code>海量，高维，多样性</code></p>
+</li>
+</ul>
+<h1>Chapter 2 了解数据</h1>
+<h2 id="数据集合的类型">数据集合的类型</h2>
+<ul>
+<li>记录型数据(例如关系记录，数据矩阵，事务性数据，<code>TF_IDF</code>)</li>
+<li>顺序型数据(视频数据，序列数据)</li>
+<li>图&amp;网络</li>
+<li>空间数据，图像，多媒体</li>
+</ul>
+<h2 id="数据对象">数据对象</h2>
+<ul>
+<li>
+<p>一个数据对象可以表示一个实体</p>
+</li>
+<li>
+<p>数据集由数据对象构成，例如大学数据库</p>
+</li>
+<li>
+<p>数据对象可以由属性描述：</p>
+<blockquote>
+<p>属性(特性)：表达数据对象的某种特性</p>
+<ul>
+<li>属性类型
+<ul>
+<li>Nominal，例如分类，状态等</li>
+<li>二元：只有两个状态(对称二元吧，不对称二元)</li>
+<li>有序型：数据值的顺序有意义</li>
+<li>数值属性：区间型(没有真正的零点)&amp;比率型(有零点)</li>
+<li>离散型和连续性属性</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h2 id="数据的统计量描述">数据的统计量描述</h2>
+<blockquote>
+<p>使用统计量描述数据的<code>中心趋势，散布</code>可以更好的理解数据</p>
+</blockquote>
+<h3 id="数据的中心趋势">数据的中心趋势</h3>
+<h4 id="均值-Mean">均值(Mean)</h4>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>x</mi><mo>ˉ</mo></mover><mo>=</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>x</mi><mi>i</mi></msub></mrow><mi>n</mi></mfrac></mrow><annotation encoding="application/x-tex">\bar{x}=\frac{\sum_{i=1}^{n}{x_i}}{n}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5678em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.18em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.494em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>x</mi><mo>ˉ</mo></mover><mo>=</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msub><mi>w</mi><mi>i</mi></msub><msub><mi>x</mi><mi>i</mi></msub></mrow></mrow><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>w</mi><mi>i</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\bar{x}=\frac{\sum_{i=1}^{n}{w_ix_i}}{\sum_{i=1}^{n}{w_i}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5678em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.488em;vertical-align:-0.994em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.494em;"><span style="top:-2.3057em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<ul>
+<li>缺点
+<ul>
+<li>均值对噪音敏感</li>
+<li>不鲁棒，受极端值影响较大</li>
+<li>不能反应数据的普遍分布</li>
+</ul>
+</li>
+</ul>
+<h4 id="中位数-Median">中位数(Median)</h4>
+<ul>
+<li>
+<p>中位数优化困难，计算也比较困难</p>
+</li>
+<li>
+<p>一种近似估计</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>m</mi><mi>e</mi><mi>d</mi><mi>i</mi><mi>a</mi><mi>n</mi><mo>=</mo><msub><mi>L</mi><mn>1</mn></msub><mo>+</mo><mfrac><mrow><mfrac><mi>n</mi><mn>2</mn></mfrac><mo>−</mo><mo>∑</mo><mrow><mi>f</mi><mi>r</mi><mi>e</mi><mi>q</mi></mrow><mo>×</mo><mi>l</mi></mrow><mrow><mi>f</mi><mi>r</mi><mi>e</mi><msub><mi>q</mi><mrow><mi>m</mi><mi>e</mi><mi>d</mi><mi>i</mi><mi>a</mi><mi>n</mi></mrow></msub></mrow></mfrac><mi>w</mi><mi>i</mi><mi>d</mi><mi>t</mi><mi>h</mi></mrow><annotation encoding="application/x-tex">median=L_1+\frac{\frac{n}{2}-\sum{freq} \times l}{freq_{median}}width
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">m</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal">ian</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.3654em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.485em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">re</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">ian</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.735em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">re</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mord mathnormal">i</span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span></span></span></span></span></p>
+</li>
+<li></li>
+</ul>
+<h4 id="众数-Mode">众数(Mode)</h4>
+<ul>
+<li>数据中最常出现的值</li>
+</ul>
+<h4 id="对称vs偏移数据">对称vs偏移数据</h4>
+<img src="/images/datamining/image-20211028132515603.png" alt="image-20211028132515603" style="zoom:50%;" />
+<img src="/images/datamining/image-20211028132529355.png" alt="image-20211028132529355" style="zoom:50%;" />
+<img src="/images/datamining/image-20211028132546796.png" alt="image-20211028132546796" style="zoom: 50%;" />
+<h3 id="数据的离散度">数据的离散度</h3>
+<ul>
+<li>
+<p>四分位数</p>
+<ul>
+<li>
+<p>五数概括</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">{</mo><mi>m</mi><mi>i</mi><mi>n</mi><mo separator="true">,</mo><msub><mi>Q</mi><mn>1</mn></msub><mo separator="true">,</mo><mi>m</mi><mi>e</mi><mi>d</mi><mi>a</mi><mi>i</mi><mi>n</mi><mo separator="true">,</mo><msub><mi>Q</mi><mn>3</mn></msub><mo separator="true">,</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{min,Q_1,medain,Q_3,max\}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal">min</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">m</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal">ain</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mclose">}</span></span></span></span></span></p>
+</li>
+<li>
+<p><code>Inter-quartile range</code></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>I</mi><mi>Q</mi><mi>R</mi><mo>=</mo><msub><mi>Q</mi><mn>3</mn></msub><mo>−</mo><msub><mi>Q</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">IQR=Q_3-Q_1
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.00773em;">QR</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+</li>
+</ul>
+</li>
+<li>
+<p>离群点：值高于或低于1.5*IQR</p>
+</li>
+<li>
+<p>盒图(boxplot)：用盒表示数据，盒的开始是Q1结束是Q3</p>
+<ul>
+<li>
+<img src="/images/datamining/image-20211028133304638.png" alt="image-20211028133304638" style="zoom:33%;" />
+</li>
+</ul>
+</li>
+<li>
+<p>方差&amp;标准差</p>
+</li>
+</ul>
+<h3 id="图描述统计量">图描述统计量</h3>
+<ul>
+<li>
+<p>直方图</p>
+<img src="/images/datamining/image-20211028133734897.png" alt="image-20211028133734897" style="zoom:33%;" />
+</li>
+<li>
+<p>Quantile plot(分位数图)</p>
+<img src="/images/datamining/image-20211028133902735.png" alt="image-20211028133902735" style="zoom: 33%;" />
+</li>
+<li>
+<p>Q-Q plot(可以比较两个数据集)</p>
+<img src="/images/datamining/image-20211028133955560.png" alt="image-20211028133955560" style="zoom: 33%;" />
+</li>
+<li>
+<p>散点图</p>
+<ul>
+<li>
+<p>正相关数据&amp;负相关数据&amp;不相关数据</p>
+<img src="/images/datamining/image-20211028134119219.png" alt="image-20211028134119219" style="zoom:33%;" />
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据可视化">数据可视化</h2>
+<ul>
+<li>
+<p>基于像素的可视化</p>
+<ul>
+<li>
+<p>例子：数据对象有四个维度<code>income,credit_limit,transaction_volumn,age</code>；我们按照<code>income</code>升序的方式构建第一个像素图，随后根据数据的对应关系构建后面的像素图</p>
+<img src="/images/datamining/image-20211028162643743.png" alt="image-20211028162643743" style="zoom:50%;" />
+</li>
+<li>
+<p>空间填充曲线：基于像素的可视化技术边缘出处的数据丢失了部分位置信息，因此使用空间填充曲线</p>
+<img src="/images/datamining/image-20211028163455115.png" alt="image-20211028163455115" style="zoom:50%;" />
+<blockquote>
+<p>例如希尔伯特曲线能够覆盖这整个区间，并保持数据的位置信息</p>
+</blockquote>
+</li>
+<li>
+<p>圆弓分割技术</p>
+</li>
+</ul>
+</li>
+<li>
+<p>几何投影可视化技术</p>
+<blockquote>
+<p>可以帮助我们理解多维空间的数据分布</p>
+</blockquote>
+<ul>
+<li>散点图</li>
+<li>散点图矩阵</li>
+<li>平行坐标</li>
+</ul>
+</li>
+<li>
+<p>基于图符的可视化</p>
+<img src="/images/datamining/image-20211028200342154.png" alt="image-20211028200342154" style="zoom:50%;" />
+<img src="/images/datamining/image-20211028200404193.png" alt="image-20211028200404193" style="zoom:50%;" />
+</li>
+<li>
+<p>层次可视化技术(树图)</p>
+</li>
+</ul>
+<h2 id="数据的相似性和相异性">数据的相似性和相异性</h2>
+<h3 id="数据矩阵">数据矩阵</h3>
+<blockquote>
+<p>数据矩阵存放了所有数据的所有属性</p>
+</blockquote>
+<ul>
+<li>如果有n个数据对象，每个对象有p个属性，那么数据矩阵的大小就是<code>n*p</code></li>
+</ul>
+<h3 id="相异性矩阵">相异性矩阵</h3>
+<blockquote>
+<p>存放n个数据对象两两之间的邻近度，两个对象越接近相似度接近于0，越不同值越大</p>
+</blockquote>
+<h3 id="近似度量">近似度量</h3>
+<ul>
+<li>
+<p>Nominal属性：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mo stretchy="false">(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>p</mi><mo>−</mo><mi>m</mi></mrow><mi>p</mi></mfrac><mspace linebreak="newline"></mspace><mi>p</mi><mtext>刻画对象属性的总数</mtext><mo separator="true">,</mo><mi>m</mi><mtext>是</mtext><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mtext>属性相同的数量</mtext></mrow><annotation encoding="application/x-tex">d(i,j)=\frac{p-m}{p} \\ p刻画对象属性的总数,m是i,j属性相同的数量
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">d</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1408em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">p</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mord cjk_fallback">刻画对象属性的总数</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">m</span><span class="mord cjk_fallback">是</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mord cjk_fallback">属性相同的数量</span></span></span></span></span></p>
+</li>
+<li>
+<p>二值属性</p>
+<p><img src="/images/datamining/image-20211028202814805.png" alt="image-20211028202814805"></p>
+<ul>
+<li>
+<p>对称的二元相异性：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mo stretchy="false">(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>r</mi><mo>+</mo><mi>s</mi></mrow><mrow><mi>q</mi><mo>+</mo><mi>r</mi><mo>+</mo><mi>s</mi><mo>+</mo><mi>t</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">d(i,j)=\frac{r+s}{q+r+s+t}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">d</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1408em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">t</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+</li>
+<li>
+<p>非对称二元的相异性：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mo stretchy="false">(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>r</mi><mo>+</mo><mi>s</mi></mrow><mrow><mi>q</mi><mo>+</mo><mi>r</mi><mo>+</mo><mi>s</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">d(i,j)=\frac{r+s}{q+r+s}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">d</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1408em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">s</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<blockquote>
+<p>由于非对称二元属性的某种状态要更加重要，因此另一种状态相同无意义要去掉</p>
+</blockquote>
+<p>例如：</p>
+<img src="/images/datamining/image-20211028204544151.png" alt="image-20211028204544151" style="zoom:50%;" />
+</li>
+</ul>
+</li>
+<li>
+<p>数值属性(Minkowski Distance)</p>
+d(i,j)= \sqrt[n]{\abs{x_{i1} -x_{j1}}^h + \abs{x_{i2} -x_{j2}}^h + ... + \abs{x_{ip} -x_{jp}}^h} \\
+i=(x_{i1},x_{i2},...,x_{ip}) \quad j=(x_{j1},x_{j2},...,x_{jp}) \\
+d(i,j)>0 \quad if \, i \not\equiv j, d(i,i)=0
+
+<ul>
+<li>
+<p>对称性，三角不等式</p>
+</li>
+<li>
+<p>h=1,Manhattan distance, 导数不存在</p>
+</li>
+<li>
+<p>h=2, 欧拉距离</p>
+</li>
+<li>
+<p>h趋近无穷：</p>
+d(i,j)=\max_{f}^{p}\abs{x_{if}-x_{jf}}
+
+</li>
+</ul>
+</li>
+<li>
+<p>有序变量：将其映射到一个区间然后计算距离</p>
+</li>
+<li>
+<p>余弦相似度：计算两个向量夹角的余弦值</p>
+</li>
+</ul>
+<h1>Chapter 3 数据预处理</h1>
+<blockquote>
+<p>在现实世界的数据是<code>dirty</code>的，因此在使用数据的时候需要对数据进行预处理，数据预处理主要有以下几个任务：</p>
+<ul>
+<li>数据清洗(补全缺失值，平滑噪音数据，鉴别或去除离群点，解决前后矛盾)</li>
+<li>数据集成(多数据库，数据立方体，文件的集成)</li>
+<li>数据规约(降维，数值规约，数据压缩)</li>
+<li>数据转换以及数据离散化(正态，概念层级生成)</li>
+</ul>
+</blockquote>
+<h2 id="数据清洗">数据清洗</h2>
+<h3 id="空缺值">空缺值</h3>
+<blockquote>
+<p>空缺值有时候需要被推断</p>
+</blockquote>
+<p>处理方法：</p>
+<ul>
+<li>丢弃，当拥有大量高质量数据时可行</li>
+<li>手动填充</li>
+<li>自动填充：
+<ul>
+<li>固定的常数值(unknow)，这种填充方式比较离谱，但有时候为了保证前端需要的字段可以使用</li>
+<li>属性平均值(大数定律，中心极限支撑，也算可行)</li>
+<li>分类均值</li>
+<li>其他基于推断的方法：贝叶斯范式或者决策树</li>
+</ul>
+</li>
+</ul>
+<h3 id="噪声数据">噪声数据</h3>
+<blockquote>
+<p>噪声大多算是一种随机错误，例如你输入数据时，少输入了一个小数点</p>
+</blockquote>
+<p>处理方法：</p>
+<ul>
+<li>
+<p>Binning(分箱)</p>
+<blockquote>
+<p>分箱通过周围数据的值来光滑有序数据值，这些有序的值被分布到一些桶或者箱中，其进行的是局部光滑</p>
+<img src="/images/datamining/image-20211029105610105.png" alt="image-20211029105610105" style="zoom:50%;" />
+</blockquote>
+</li>
+<li>
+<p>回归</p>
+<blockquote>
+<p>通过函数拟合来光滑数据</p>
+</blockquote>
+</li>
+<li>
+<p>聚类</p>
+<blockquote>
+<p>通过聚类来检测离群点</p>
+</blockquote>
+</li>
+<li>
+<p>结合计算机和人的观察</p>
+</li>
+</ul>
+<h2 id="数据集成">数据集成</h2>
+<blockquote>
+<p>将多源数据集成为连贯一致数据</p>
+</blockquote>
+<h3 id="处理检测数据集成时的数据冗余">处理检测数据集成时的数据冗余</h3>
+<blockquote>
+<p>可以根据相关性分析(标称属性)或者相关系数(数值属性)检测数据冗余</p>
+</blockquote>
+<h4 id="相关性分析-Nominal-Data">相关性分析(Nominal Data)</h4>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mtext> </mtext><mi>t</mi><mi>e</mi><mi>s</mi><mi>t</mi><mspace linebreak="newline"></mspace><msup><mi>χ</mi><mn>2</mn></msup><mo>=</mo><mo>∑</mo><mfrac><mrow><mo stretchy="false">(</mo><mi>O</mi><mi>b</mi><mi>s</mi><mi>e</mi><mi>r</mi><mi>v</mi><mi>e</mi><mi>d</mi><mo>−</mo><mi>E</mi><mi>x</mi><mi>c</mi><mi>e</mi><mi>p</mi><mi>t</mi><mi>e</mi><mi>d</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><mrow><mi>E</mi><mi>x</mi><mi>c</mi><mi>e</mi><mi>p</mi><mi>t</mi><mi>e</mi><mi>d</mi></mrow></mfrac><mspace linebreak="newline"></mspace><msup><mi>χ</mi><mn>2</mn></msup><mtext> </mtext><mi>b</mi><mi>i</mi><mi>g</mi><mi>g</mi><mi>e</mi><mi>r</mi><mo separator="true">,</mo><mi>t</mi><mi>h</mi><mi>e</mi><mtext> </mtext><mi>m</mi><mi>o</mi><mi>r</mi><mi>e</mi><mtext> </mtext><mi>r</mi><mi>e</mi><mi>l</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">x^2 \, test \\
+\chi ^2=\sum \frac{(Observed-Excepted)^2}{Excepted} \\
+\chi ^2 \, bigger,the \, more \, related
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mord mathnormal">es</span><span class="mord mathnormal">t</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1.0585em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">χ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3715em;vertical-align:-0.8804em;"></span><span class="mop op-symbol large-op" style="position:relative;top:0em;">∑</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">x</span><span class="mord mathnormal">ce</span><span class="mord mathnormal">pt</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mord mathnormal">b</span><span class="mord mathnormal" style="margin-right:0.02778em;">ser</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">x</span><span class="mord mathnormal">ce</span><span class="mord mathnormal">pt</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1.0585em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">χ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">bi</span><span class="mord mathnormal" style="margin-right:0.03588em;">gg</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">m</span><span class="mord mathnormal">ore</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">re</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span></span></span></span></span></p>
+<img src="/images/datamining/image-20211029135526149.png" alt="image-20211029135526149" style="zoom:50%;" />
+<h4 id="相关系数分析-数值数据">相关系数分析(数值数据)</h4>
+<blockquote>
+<p>通过计算相关系数估计两个属性的相关度</p>
+</blockquote>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>r</mi><mrow><mi>A</mi><mo separator="true">,</mo><mi>B</mi></mrow></msub><mo>=</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>A</mi><mo>ˉ</mo></mover><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>b</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>B</mi><mo>ˉ</mo></mover><mo stretchy="false">)</mo></mrow><mrow><mi>n</mi><msub><mi>σ</mi><mi>A</mi></msub><msub><mi>σ</mi><mi>B</mi></msub></mrow></mfrac><mo>=</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>−</mo><mi>n</mi><mover accent="true"><mi>A</mi><mo>ˉ</mo></mover><mover accent="true"><mi>B</mi><mo>ˉ</mo></mover></mrow><mrow><mi>n</mi><msub><mi>σ</mi><mi>A</mi></msub><msub><mi>σ</mi><mi>B</mi></msub></mrow></mfrac><mspace linebreak="newline"></mspace><mo>−</mo><mn>1</mn><mo>≤</mo><msub><mi>r</mi><mrow><mi>A</mi><mo separator="true">,</mo><mi>B</mi></mrow></msub><mo>≤</mo><mn>1</mn><mspace linebreak="newline"></mspace><msub><mi>r</mi><mrow><mi>A</mi><mo separator="true">,</mo><mi>B</mi></mrow></msub><mo>&gt;</mo><mn>0</mn><mo separator="true">,</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mtext>正相关，值越大相关性越强；反之负相关</mtext><mspace linebreak="newline"></mspace><msub><mi>r</mi><mrow><mi>A</mi><mo separator="true">,</mo><mi>B</mi></mrow></msub><mo>=</mo><mn>0</mn><mo separator="true">,</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mtext>独立</mtext><mspace linebreak="newline"></mspace></mrow><annotation encoding="application/x-tex">r_{A,B}=\frac{\sum_{i=1}^{n}(a_i-\bar{A})(b_i-\bar{B})}{n \sigma_A \sigma_B} = \frac{\sum_{i=1}^{n}(a_ib_i)-n\bar{A}\bar{B}}{n \sigma_A \sigma_B} \\
+-1 \leq r_{A,B} \leq 1 \\
+r_{A,B} &gt; 0,A,B正相关，值越大相关性越强；反之负相关 \\
+r_{A,B}=0,A,B独立 \\
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3458em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5098em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">A</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1111em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3458em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5098em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">n</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">A</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1111em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">ˉ</span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.7804em;vertical-align:-0.136em;"></span><span class="mord">−</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9221em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8252em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord cjk_fallback">正相关，值越大相关性越强；反之负相关</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord cjk_fallback">独立</span></span><span class="mspace newline"></span></span></span></span></p>
+<ul>
+<li>注意相关性不蕴涵因果关系</li>
+</ul>
+<h4 id="协相关系数">协相关系数</h4>
+<img src="/images/datamining/image-20211029141904644.png" alt="image-20211029141904644" style="zoom: 67%;" />
+<ul>
+<li>协方差为0，两者独立</li>
+<li>协方差大于0，两者均比期望值大</li>
+<li>协方差小于0，A比期望值大，B比期望值小</li>
+</ul>
+<h2 id="数据规约">数据规约</h2>
+<blockquote>
+<p>数据规约要在不影响分析结果的条件下减少数据集，一些策略(降维，数值规约，数据压缩)</p>
+</blockquote>
+<h3 id="降维">降维</h3>
+<blockquote>
+<p>无监督方法：</p>
+<ul>
+<li>LSI</li>
+<li><strong>PCA</strong></li>
+<li>ICA</li>
+<li>CCA</li>
+</ul>
+<p>监督：</p>
+<ul>
+<li><strong>LDA</strong></li>
+</ul>
+<p>半监督：</p>
+<ul>
+<li>SDA</li>
+</ul>
+</blockquote>
+<ul>
+<li>
+<p>线性数据降维方法:<code>LSI</code>,<code>PCA</code>,<code>LDA</code>,<code>CCA</code></p>
+</li>
+<li>
+<p>非线性：核方法</p>
+</li>
+</ul>
+<h4 id="LDA">LDA</h4>
+<img src="/images/datamining/image-20211029143042465.png" alt="image-20211029143042465" style="zoom:50%;" />
+<ul>
+<li>特征选取：每一列一个元素为一进行线性变换</li>
+<li>特征提取：选取一定维度进行组合</li>
+</ul>
+<img src="/images/datamining/image-20211029144505509.png" alt="image-20211029144505509" style="zoom: 67%;" />
+<img src="/images/datamining/image-20211029144529524.png" alt="image-20211029144529524" style="zoom:67%;" />
+<img src="/images/datamining/image-20211029144546013.png" alt="image-20211029144546013" style="zoom:67%;" />
+<h4 id="PCA">PCA</h4>
+<blockquote>
+<p>主成分分析是选取k个最能代表数据的n维正交向量，其中k&lt;=n</p>
+</blockquote>
+<img src="/images/datamining/image-20211029144312978.png" alt="image-20211029144312978" style="zoom: 67%;" />
+<img src="/images/datamining/image-20211029144335436.png" alt="image-20211029144335436" style="zoom:67%;" />
+<img src="/images/datamining/image-20211029144351748.png" alt="image-20211029144351748" style="zoom:67%;" />
+<img src="/images/datamining/image-20211029144407637.png" alt="image-20211029144407637" style="zoom:67%;" />
+<img src="/images/datamining/image-20211029144425809.png" alt="image-20211029144425809" style="zoom:67%;" />
+<h3 id="数值规约">数值规约</h3>
+<ul>
+<li>
+<p>有参数方法(回归)</p>
+</li>
+<li>
+<p>无参数方法(直方图，聚类，采样)</p>
+<blockquote>
+<p>简单随机采样，不放回采样，放回采样，先分组再采样</p>
+<img src="/images/datamining/image-20211029144801833.png" alt="image-20211029144801833" style="zoom:67%;" />
+</blockquote>
+</li>
+</ul>
+<h2 id="数据压缩">数据压缩</h2>
+<ul>
+<li>有损压缩</li>
+<li>无损压缩</li>
+</ul>
+<h2 id="归一化">归一化</h2>
+<p><img src="/images/datamining/image-20211029144922821.png" alt="image-20211029144922821"></p>
+<h1>Chapter 4 频繁模式挖掘</h1>
+<blockquote>
+<p>频繁模式：在数据集中经常出现的一种模式，其作用是寻找数据中的固有规律</p>
+<p>在本节中，我们假设从关系型数据库中挖掘频繁模式，由此我们做出一下假设</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>I</mi><mo>=</mo><mo stretchy="false">{</mo><msub><mi>I</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>I</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>I</mi><mi>m</mi></msub><mo stretchy="false">}</mo><mspace width="1em"/><mi>I</mi><mtext>是项的集合</mtext></mrow><annotation encoding="application/x-tex">I=\{I_1,I_2,...,I_m\} \quad I是项的集合
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">...</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">}</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord cjk_fallback">是项的集合</span></span></span></span></span></p>
+<p>数据<code>D</code>是数据库中事务的集合，每一个事务<code>T</code>是一个非空项集，且每个事务都有一个标识符<code>TID</code>，有：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>T</mi><mo>⊆</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">T \subseteq I
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.136em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">⊆</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span></span></span></span></span></p>
+<p>一个事务<code>T</code>包含<code>A</code>，<code>A</code>是一个项集，当且仅当<code>A</code>是<code>T</code>的子集</p>
+<p><code>X</code>是一个项集</p>
+</blockquote>
+<h2 id="一些定义">一些定义</h2>
+<h3 id="频繁模式概念">频繁模式概念</h3>
+<ul>
+<li>项集：一个或者多个项的集合，k项集中包括k个项</li>
+<li>项集的频度、支持度技术或计数：项集的出现频度是包含项集的事务数</li>
+<li>如果X的支持度大于最小支持度阈值，那么这个项集就是频繁的</li>
+</ul>
+<h3 id="关联模式">关联模式</h3>
+<ul>
+<li>
+<p>找到左右满足最小支持度和置信度的规则<code>x-&gt;y</code></p>
+<ul>
+<li>
+<p>支持度：一个事务包含<code>xUy</code>的概率</p>
+</li>
+<li>
+<p>置信度：一个事务包含x同时也包含t的条件概率</p>
+<p><img src="/images/datamining/image-20211030145449998.png" alt="image-20211030145449998"></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>例子：</p>
+<img src="/images/datamining/image-20211030143654909.png" alt="image-20211030143654909" style="zoom:50%;" />
+<img src="/images/datamining/image-20211030143711426.png" alt="image-20211030143711426" style="zoom:50%;" />
+<blockquote>
+<p>一般来说，关联规则的挖掘可以归结为挖掘频繁项集，这是一个两步的过程：</p>
+<ul>
+<li>找出所有的频繁项集</li>
+<li>有频繁项集产生的强关联规则：满足最小支持度和最小置信度</li>
+</ul>
+</blockquote>
+<h3 id="闭频繁模式和极大频繁模式">闭频繁模式和极大频繁模式</h3>
+<blockquote>
+<p>如果最小支持度较低的话，那么会产生大量满足最小支持度的频繁项集(可以达到阶乘级)，因此引入闭频繁模式和极大频繁模式</p>
+</blockquote>
+<ul>
+<li>项集X在数据集中D中是闭的，如果不存在真超项集Y使得Y与X在D中具有相同的支持度计数(满足某个支持度且项集最大)</li>
+<li>项集X在数据集D中是闭频繁项，如果X在D中是闭的和频繁的(满足最小支持度且项集最大)</li>
+<li>项集X是D中的极大频繁项集或极大集，如果X是频繁的，并且不存在超项集Y使得X是Y的子集并且Y在D中是频繁的(一个频繁且包含项最多的项集)</li>
+</ul>
+<h2 id="如何挖掘频繁模式？">如何挖掘频繁模式？</h2>
+<blockquote>
+<p>本节主要描述<code>Apriori</code>算法，该算法使用了一种成为逐层搜索的迭代方法，其中k项集由于探索(k+1)项集</p>
+</blockquote>
+<h3 id="Apriori算法">Apriori算法</h3>
+<ul>
+<li>首先通过扫描数据库，累计每个项的计数，并收集满足最小支持度的项，找出频繁模式1项集的集合，记为L1</li>
+<li>使用L1找出频繁模式2项集的集合L2</li>
+<li>使用L2找L3，如此进行，知道不能再找到频繁k项集</li>
+<li>找出每个Lk需要一次数据库的完整扫描</li>
+</ul>
+<blockquote>
+<p>为了提高频繁项集逐层产生的效率，先验性质用于压缩搜索空间</p>
+</blockquote>
+<blockquote>
+<p>先验性质：频繁项集的所有非空子集一定也是频繁的</p>
+<p>该性质比较显然，如果频繁项集的非空子集不是频繁的那么必然会出现其支持度大于子集的支持度，但作为子集，其支持度应该大于等于其本身，产生矛盾</p>
+</blockquote>
+<p>算法的根本原理：</p>
+<ul>
+<li>如果一个项集是不频繁的，那么不能用这个项集去生成超集</li>
+</ul>
+<p>算法过程：</p>
+<ul>
+<li>扫描数据集D找到频繁1项集</li>
+<li>从长度为k的频繁项集中生成(k+1)项集</li>
+<li>检测这些项集在不在数据集D中</li>
+<li>如果没有没有频繁项集能够生成则停止</li>
+</ul>
+<img src="/images/datamining/image-20211030153436156.png" alt="image-20211030153436156" style="zoom:50%;" />
+<blockquote>
+<p>Apriori算法是用于L(k-1)生成Lk时的</p>
+</blockquote>
+<h3 id="FPGrowth-不使用候选集挖掘频繁模式">FPGrowth 不使用候选集挖掘频繁模式</h3>
+<blockquote>
+<p>Apriori算法虽然已经压缩了候选集的产生数量，但是其仍然有一些开销：</p>
+<ul>
+<li>仍然需要产生大量的候选项集</li>
+<li>需要重复的扫描整个数据库，通过模式匹配检查一个很大的候选集合</li>
+</ul>
+</blockquote>
+<p>频繁模式增长：</p>
+<ul>
+<li>首先将代表频繁项集的数据压缩到一颗频繁模式树(FP树)，该树仍然保留项集的关联信息</li>
+<li>把这种压缩后的数据库划分成一组条件数据库，每个数据库关联一个频繁项或“模式段”，分别挖掘每个条件数据库</li>
+<li>对于每个“模式片段”，只需要考察与它相关联的数据集</li>
+<li>随着被考察的模式的增长，这种方法可以显著地压缩被搜索数据集的大小</li>
+</ul>
+<p>例子：</p>
+<p><img src="/images/datamining/image-20211030162155709.png" alt="image-20211030162155709"></p>
+<p><img src="/images/datamining/image-20211030162214125.png" alt="image-20211030162214125"></p>
+<blockquote>
+<p>对于I3的条件FP树</p>
+<p><img src="/images/datamining/image-20211030162245030.png" alt="image-20211030162245030"></p>
+</blockquote>
+<h2 id="序列模式的挖掘">序列模式的挖掘</h2>
+<h3 id="序列模式">序列模式</h3>
+<p><img src="/images/datamining/image-20211030162713349.png" alt="image-20211030162713349"></p>
+<ul>
+<li>Event:非空无序的项的集合</li>
+<li>sequence：有序的events</li>
+</ul>
+<h4 id="事务数据库vs序列数据库">事务数据库vs序列数据库</h4>
+<p><img src="/images/datamining/image-20211030163736710.png" alt="image-20211030163736710"></p>
+<h3 id="序列模式的挖掘-2">序列模式的挖掘</h3>
+<blockquote>
+<p>给定一个序列的集合以及支持度阈值，从中找到所有频繁子序列</p>
+<p>一个数据库中包含的序列是非常大量的，因此需要找到一种高效的方法进行挖掘</p>
+</blockquote>
+<h4 id="基于Apriori的方法">基于Apriori的方法</h4>
+<blockquote>
+<p>使用的先验性质：如果一个序列s不是频繁的，那么其超序列也不是频繁的</p>
+</blockquote>
+<ul>
+<li>GSP：
+<ul>
+<li>流程与Apriori基本一致</li>
+<li>在连接S1,S2时，仅当从S1中去掉第一个事件得到的子序列与从S2中去掉最后一个事件得到的子序列相同，合并结果为S1与S2最后一个事件的连接
+<ul>
+<li>若S2的最后两个事件属于相同的元素，则S2的最后一个事件在合并后的序列中是S1的最后一个元素的一部分</li>
+<li>若S2的最后两个事件属于不同的元素，则S2的最后一个事件在合并后的序列中成为连接到S1的尾部的单独元素</li>
+</ul>
+</li>
+<li>GSP对于数据库的扫描次数过多，并且产生了大量的候选序列</li>
+</ul>
+</li>
+</ul>
+<h2 id="模式评估方法">模式评估方法</h2>
+<h3 id="相关性">相关性</h3>
+<p><img src="/images/datamining/image-20211030184109290.png" alt="image-20211030184109290"></p>
+<h1>Chapter 5 分类</h1>
+<blockquote>
+<p>监督学习：数据有标签</p>
+<p>无监督学习：数据标签未知，可以进行聚类</p>
+</blockquote>
+<ul>
+<li>两步分析过程：
+<ul>
+<li>模型构建，用于构建模型的数据是训练数据集</li>
+<li>模型使用：将未知的或将来的数据进行分类</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>可以说是氛围模型的训练和评估两个过程</p>
+</blockquote>
+<h2 id="决策树">决策树</h2>
+<blockquote>
+<p>决策树可以生成规则，可解释性强</p>
+<p>决策树以自顶向下的递归的分治方式构造</p>
+</blockquote>
+<ul>
+<li>基础算法：
+<ul>
+<li>所有的训练实例都在根上</li>
+<li>实例基于被选择的属性进行递归的划分</li>
+<li>测试实例进行评价</li>
+</ul>
+</li>
+</ul>
+<h3 id="信息熵">信息熵</h3>
+<blockquote>
+<p>从熵的角度来说，熵表示随机变量不确定性的度量，考虑如果一个事件发生的概率为0或者为1，其不确定性是一样的，都是确定。那么，当一个事件发生概率为0.5的时候，事件的不确定才是最大的，因为发生与不发生概率相同。由此，可以知道我们在构造衡量熵大小的模型时，首先模型是依赖于离散变量的概率分布的，其次表示熵的模型在<code>p(x)=0.5</code>处最大，<code>0&lt;=p(x)&lt;=0.5</code>是单调增的，相对的另一半区间是单调减的</p>
+<p><img src="/images/datamining/image-20211101155722485.png" alt="image-20211101155722485"></p>
+</blockquote>
+<ul>
+<li>使用<code>h(x)</code>表示观测到的信息内容，<code>h(x)</code>是概率<code>p(x)</code>的单调函数:</li>
+</ul>
+<blockquote>
+<p>这个<code>h(x)</code>是怎么得到的呢？考虑我们对于随机变量<code>X,Y</code>(两者独立)，我们有两个取值<code>x,y</code>，那么<code>p(X=x,Y=y)=p(x)*p(y)</code>，再考虑对于信息内容应该是<code>h(X=x,Y=y)=h(x)+h(y)</code>，又考虑到<code>p(x)</code>是<code>h(x)</code>的输入，那么将乘法转为加法的自然能够想到对数函数</p>
+</blockquote>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mspace linebreak="newline"></mspace><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mi>ln</mi><mo>⁡</mo><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">h(x)=- \log_{2}{p(x)} \\
+h(x)=- \ln{p(x)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span></span></p>
+<blockquote>
+<p>从h(x)的两种计算方式我们也能看出，h(x)随着p(x)的增大而减小</p>
+<p>在这里，我们将使用以二为底的h(x)其单位定义为bit，以e为底的单位为nat</p>
+</blockquote>
+<ul>
+<li>
+<p>信息熵：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>H</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><munder><mo>∑</mo><mi>x</mi></munder><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">H(x)=- \sum_{x}p(x) \log_{2}{p(x)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3em;vertical-align:-1.25em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.9em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.25em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span></span></p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<p>信息增益表示得知特征X的信息而使得类Y的信息的不确定性减少的程度。</p>
+<p>理解这句话时我们可以想，首先我们有一个随机变量X，X表示会不会买电脑，在数据库中，每一条购买记录都有一个属性Y，Y表示年龄。首先我们可以计算随机变量X的信息熵，其次我们根据属性Y的值，假设相同的我们认为是一类，这个时候我们在每一类中计算在该类中随机变量的信息熵，最后将其加权求和，那么我们求和得到的结果是什么呢？其实就是在使用这个特征分类下，随机变量的信息熵，用不分类之前的信息熵减去分类后的信息熵，得到的就是信息增益。</p>
+<p>再考虑如何理解这个信息增益，这个增益其实表示的是使用某个特征分类后，信息熵减少的程度，分类的目的不就是让数据变得不不混乱吗？所以信息增益越大的，我们就应该使用这种特征分类。总结下来，虽然这个差值叫做信息增益，但是在理解层面上，我们应该理解为信息混乱程度的减少程度，自然是越大越好。</p>
+</blockquote>
+<p>例子：</p>
+<img src="/images/datamining/image-20211101162305693.png" alt="image-20211101162305693" style="zoom:50%;" />
+<ul>
+<li>
+<p>使用信息熵进行分类的一些问题：</p>
+<ul>
+<li>
+<p>考虑如果一个特征拥有很多种值，信息增益方法会倾向与选择这个特征</p>
+</li>
+<li>
+<p>因此使用信息增长率来解决这个问题</p>
+<img src="/images/datamining//image-20211101162940642.png" alt="image-20211101162940642" style="zoom:50%;" />
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="基尼指数">基尼指数</h3>
+<blockquote>
+<p>如果一个数据集D中包含了n个类，基尼系数被定义为</p>
+</blockquote>
+gini(D)=1-\sum_{j=1}^{n}{p_j^2} \\
+p_j=\frac{\abs{C_j}}{\abs{D}}
+
+<p>例子：</p>
+<img src="/images/datamining/image-20211101164050738.png" alt="image-20211101164050738" style="zoom:67%;" />
+<h3 id="其他">其他</h3>
+<ul>
+<li>过拟合</li>
+<li>树剪枝</li>
+</ul>
+<h2 id="贝叶斯分类">贝叶斯分类</h2>
+<blockquote>
+<p>可以参照<a target="_blank" rel="noopener" href="https://www.matongxue.com/madocs/301/">如何理解贝叶斯定理</a>理解贝叶斯定理，总而言之就是一个事件在某个新事件出现后的概率变化计算</p>
+</blockquote>
+<p><img src="/images/datamining/image-20211101171016012.png" alt="image-20211101171016012"></p>
+<img src="/images/datamining/image-20211101171031718.png" alt="image-20211101171031718" style="zoom: 67%;" />
+<p>例子：</p>
+<img src="/images/datamining/image-20211101171232065.png" alt="image-20211101171232065" style="zoom:67%;" />
+<ul>
+<li>
+<p>为了避免出现概率为0的情况出现，可以使用拉普拉斯矫正保证每个事件出现的频数至少为1</p>
+</li>
+<li>
+<p>贝叶斯会作为一些模型的baseline</p>
+</li>
+</ul>
+<h2 id="支持向量机">支持向量机</h2>
+<blockquote>
+<p>支持向量机的分类思想是找到最佳分割的超平面，其鲁棒性比较强</p>
+</blockquote>
+<ul>
+<li>
+<p>其推导过程主要是找到平面外一点到平面的距离</p>
+<p><img src="/images/datamining/image-20211101191748837.png" alt="image-20211101191748837"></p>
+</li>
+</ul>
+<blockquote>
+<p>结果</p>
+</blockquote>
+<p><img src="/images/datamining/image-20211101191836157.png" alt="image-20211101191836157"></p>
+<h2 id="模型的评价以及选择">模型的评价以及选择</h2>
+<h3 id="Confusion-matrix">Confusion matrix</h3>
+<p><img src="/images/datamining/image-20211101191944655.png" alt="image-20211101191944655"></p>
+<p><img src="/images/datamining/image-20211101192020790.png" alt="image-20211101192020790"></p>
+<p><img src="/images/datamining/image-20211101192034823.png" alt="image-20211101192034823"></p>
+<p><img src="/images/datamining/image-20211101192047363.png" alt="image-20211101192047363"></p>
+<h3 id="Boostrap-自助法">Boostrap(自助法)</h3>
+<blockquote>
+<p>自助法从给定训练元组中又放回的均匀抽样</p>
+</blockquote>
+<ul>
+<li>
+<p>.632自助法：</p>
+<ul>
+<li>
+<p>假设给定的数据集包含d个元组，该数据集又放回的抽样d次，产生d个样本的自助样本或训练集。</p>
+</li>
+<li>
+<p>其结果是，在平均情况下，63.2%原数据元组将出现在自助样本中，而其余38.8%的元组将形成检验集</p>
+</li>
+<li>
+<p>重复k次，准确率：</p>
+<p><img src="/images/datamining/image-20211105092255706.png" alt="image-20211105092255706"></p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>对于小数据集，这种方法比较有效</p>
+</blockquote>
+<h2 id="集成方法提高分类准确性">集成方法提高分类准确性</h2>
+<blockquote>
+<p>一个模型不可靠就综合多个模型的结果</p>
+</blockquote>
+<ul>
+<li>Bagging(表示自助聚集)：少数服从多数</li>
+<li>Adaboost：在训练中，尽可能选择上一轮分错的数据</li>
+<li>随机森林：每颗决策树投票</li>
+</ul>
+<h1>Chapter 6 聚类</h1>
+<blockquote>
+<p>数据聚类将相似的数据划分为同一类，一般为无监督学习，数据没有标签</p>
+</blockquote>
+<h2 id="聚类的质量">聚类的质量</h2>
+<blockquote>
+<p>好的聚类：好的聚类是最大化类内的相似度，最小化类外的相似度</p>
+</blockquote>
+<p>聚类的质量依赖于；</p>
+<ul>
+<li>方法使用的相似度度量</li>
+<li>实现</li>
+<li>发现一些或者全部隐藏模式的能力</li>
+</ul>
+<p>主要的聚类方法：</p>
+<ul>
+<li>划分方法：给定数据集，将数据划分为若干个簇，大部分划分的方法是基于距离的，采用一种迭代的重定位技术，通过把对象从一个组移动到另一个组来改进划分</li>
+<li>层次方法：分为凝聚和分裂，凝聚是每个对象作为一个组，逐渐合并，分裂是所有对象一开始作为一个组，逐渐进行划分</li>
+<li>基于密度的方法：对于给定簇的每个数据点，在给定半径的邻域中必须至少包含最小数目的点</li>
+<li>基于网格的方法：将对象空间量化为有限单元，形成一个网格结构</li>
+</ul>
+<p><img src="/images/datamining/image-20211105115739196.png" alt="image-20211105115739196"></p>
+<h2 id="k-means">k-means</h2>
+<blockquote>
+<p>已知：N个数据，要将数据划分为几类</p>
+<p>目标：将数据划分成指定类数</p>
+</blockquote>
+<p><img src="/images/datamining/image-20211105120047560.png" alt="image-20211105120047560"></p>
+<p><img src="/images/datamining/image-20211105120112230.png" alt="image-20211105120112230"></p>
+<p><img src="/images/datamining/image-20211105120142591.png" alt="image-20211105120142591"></p>
+<p><img src="/images/datamining/image-20211105120154317.png" alt="image-20211105120154317"></p>
+<h3 id="迭代的两阶段">迭代的两阶段</h3>
+<ul>
+<li>固定中心点，将所有数据对象根据距离，划分到最近的那一簇</li>
+<li>计算每一簇的均值</li>
+<li>迭代</li>
+</ul>
+<p><img src="/images/datamining/image-20211105121033693.png" alt="image-20211105121033693"></p>
+<p><img src="/images/datamining/image-20211105121141365.png" alt="image-20211105121141365"></p>
+<blockquote>
+<p>kmeans算法算是继承了均值的缺点，对于离群点非常敏感</p>
+</blockquote>
+<h2 id="K-Medoids">K-Medoids</h2>
+<blockquote>
+<p>K-Means使用均值作为集群的中心点，K-Medoids使用集群的中心点，即在集群中最中间的对象</p>
+</blockquote>
+<p><img src="/images/datamining/image-20211105122308654.png" alt="image-20211105122308654"></p>
+<p><img src="/images/datamining/image-20211105122406940.png" alt="image-20211105122406940"></p>
+<blockquote>
+<p>在一个簇中，随机选取一个对象作为新的中心点，并计算这个簇中其他点到这个点的距离和，如果比之前那个点小，则交换之前的点和现在的点</p>
+</blockquote>
+<p>此方法在小的数据集上运行良好，但是对于大的数据集要花费大量的时间</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">LGC</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zjulgc.github.io/2021/10/25/DataMining/">https://zjulgc.github.io/2021/10/25/DataMining/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zjulgc.github.io" target="_blank">Blog for LGC</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/course/">course</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/12/01/roadmap/"><img class="prev-cover" data-lazy-src="/img/h4.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Research Roadmap</div></div></a></div><div class="next-post pull-right"><a href="/2021/10/23/Optim/"><img class="next-cover" data-lazy-src="/img/h11.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">优化算法</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/03/11/人工智能-搜索/" title="人工智能-搜索"><img class="relatedPosts_cover" data-lazy-src="/img/h10.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-11</div><div class="relatedPosts_title">人工智能-搜索</div></div></a></div><div class="relatedPosts_item"><a href="/2021/12/29/高级数据库/" title="高级数据库"><img class="relatedPosts_cover" data-lazy-src="/img/h7.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-29</div><div class="relatedPosts_title">高级数据库</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By LGC</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script></div></body></html>
