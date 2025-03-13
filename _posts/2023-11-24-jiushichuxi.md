@@ -1,7 +1,7 @@
 ---
 title: '旧时除夕&一场源自魔都的梦'
 date: 2023-11-24 15:50:34
-permalink: /posts/2023/jiushichuxi
+permalink: /posts/2023/11/24/jiushichuxi
 tags:
   - music
   - trip
