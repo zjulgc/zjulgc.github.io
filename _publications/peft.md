@@ -5,8 +5,8 @@ category: conferences
 permalink: /publication/peft
 date: 2024-10-27
 venue: 'ASE 24: Proceedings of the 39th IEEE/ACM International Conference on Automated Software Engineering'
-slidesurl: 'https://raw.githubusercontent.com/zjulgc/zjulgc.github.io/main/files/ASE24.pptx'
-paperurl: 'https://raw.githubusercontent.com/zjulgc/zjulgc.github.io/main/files/Exploring_Parameter_Effective_Fine_Tuning_of_Large_Language_Model_on_Automated_Program_Repair.pdf'
+slidesurl: 'https://github.com/zjulgc/zjulgc.github.io/raw/refs/heads/master/files/ASE24.pptx'
+paperurl: 'https://github.com/zjulgc/zjulgc.github.io/raw/refs/heads/master/files/Exploring_Parameter_Effective_Fine_Tuning_of_Large_Language_Model_on_Automated_Program_Repair.pdf'
 citation: 'Li, Guochang, et al. "Exploring parameter-efficient fine-tuning of large language model on automated program repair." Proceedings of the 39th IEEE/ACM International Conference on Automated Software Engineering. 2024.'
 ---
 
